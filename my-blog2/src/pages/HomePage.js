@@ -3,7 +3,7 @@ import React from 'react';
 const HomePage = () => (
     <>
 
-    <h1> Hello, welcome to m blog! </h1>
+    <h1> Hello, welcome to my blog! </h1>
     <p>
         Lorem Ipsum is simply dummy text of the printing and typesetting industry.
         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.

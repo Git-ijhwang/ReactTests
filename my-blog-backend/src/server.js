@@ -77,13 +77,21 @@ app.post ('/api/articles/:name/upvote', (req, res) => {
     res.status(200).send(`${articleName} now has ${articlesInfo[articleName].upvotes} upvotes`);
 });
 
+
 app.post('/api/articles/:name/add-comment', (req, res) => {
     const { username, text } = req.body;
     const articleName = req.params.name;
 
-    articlesInfo[articleName].comments.push({ username, text});
-
-    res.status(200).send(articlesInfo[articleName]);
+    withDb ( async (db) => {
+        const articleInfo = await db.collection('articles').findOne({name: articleName});
+        await db.collection('articles').updateOne({name:articleName}, {
+            '$set': {
+                comments: articleInfo.comments.concat({ username, text}),
+            },
+      });
+      const updatedArticleInfo = await db.collection('articles').findOne({name: articleName});
+      res.status(200).json(updatedArticleInfo);
+    }, res);
 
 });
 
