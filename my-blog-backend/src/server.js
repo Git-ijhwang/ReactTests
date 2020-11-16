@@ -36,7 +36,7 @@ const withDb = async (operations, res) => {
 
 }
 
-app.get('/api/articles/:name', async (req, res) => {
+app.get('http://localhost:3000/api/articles/:name', async (req, res) => {
 
     withDB(async (db) => {
       const articleName = req.params.name;
@@ -47,7 +47,7 @@ app.get('/api/articles/:name', async (req, res) => {
 
 });
 
-app.post('/api/articles/:name/upvote', async (req, res) => {
+app.post('http://localhost:3000/api/articles/:name/upvote', async (req, res) => {
 
     withDB( async (db) => {
       const articleName = req.params.name;
@@ -70,7 +70,7 @@ app.post('/api/articles/:name/upvote', async (req, res) => {
 // app.get('/hello/:name', (req, res) => res.send(`Hello ${req.params.name}`));
 // app.post('/hello', (req, res) => res.send(`HHello! ${req.body.name}`));
 
-app.post ('/api/articles/:name/upvote', (req, res) => {
+app.post ('http://localhost:3000/api/articles/:name/upvote', (req, res) => {
     const articleName = req.params.name;
 
     articlesInfo[articleName].upvotes += 1;
@@ -78,7 +78,7 @@ app.post ('/api/articles/:name/upvote', (req, res) => {
 });
 
 
-app.post('/api/articles/:name/add-comment', (req, res) => {
+app.post('http://localhost:3000/api/articles/:name/add-comment', (req, res) => {
     const { username, text } = req.body;
     const articleName = req.params.name;
 

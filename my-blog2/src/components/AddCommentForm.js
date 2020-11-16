@@ -6,7 +6,7 @@ const AddCommentForm = ({articleName, setArticleInfo}) => {
     const [commentText, setCommentText] = useState('');
 
     const addComment = async () => {
-        const result = await fetch (`/api/articles/${articleName}/addcomment`, {
+        const result = await fetch (`http://localhost:3000/api/articles/${articleName}/addcomment`, {
             method: "post",
             body: JSON.stringify({ username, text: commentText }),
             header: {
@@ -15,6 +15,8 @@ const AddCommentForm = ({articleName, setArticleInfo}) => {
         }) 
         const body = await result.json();
         setArticleInfo (body)
+        setUsername('');
+        setCommentText('')
     }
 
     return (
@@ -22,14 +24,14 @@ const AddCommentForm = ({articleName, setArticleInfo}) => {
         <h3> Add a Comment</h3>
         <label >
             Name: 
-              <input type="text" value="username" />
+              <input type="text" value={username} onChange={(event) => setUsername(event.target.value)}/>
         </label>
 
         <label >
             Comment: 
-          <textarea rows="4" cols="50" value="commentText"/>
+          <textarea rows="4" cols="50" value={commentText} onChange={(event) => setCommentText(event.target.value)}/>
         </label>
-        <button  onClick={()=>addComment}> Add Comment </button>
+        <button  onClick={()=>addComment()}> Add Comment </button>
       </div>
     )
 };
